@@ -11,13 +11,19 @@ interface ProductBrowserProps {
   products: Product[];
   categories: Category[];
   wishlistIds?: string[];
+  initialQuery?: string;
 }
 
 // Client-side search/filter/sort over the full product list provided by the
 // server. The catalogue is small, so filtering in the browser keeps the UX
 // instant without extra API round-trips.
-export function ProductBrowser({ products, categories, wishlistIds = [] }: ProductBrowserProps) {
-  const [query, setQuery] = useState("");
+export function ProductBrowser({
+  products,
+  categories,
+  wishlistIds = [],
+  initialQuery = "",
+}: ProductBrowserProps) {
+  const [query, setQuery] = useState(initialQuery);
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState<SortOption | "">("");
 

@@ -7,13 +7,18 @@ export const dynamic = "force-dynamic";
 
 export const metadata = { title: "Products | Shoply" };
 
-export default async function ProductsPage() {
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q } = await searchParams;
   const [products, categories] = await Promise.all([listProducts(), listCategories()]);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
       <h1 className="mb-6 text-2xl font-bold text-gray-900">All Products</h1>
-      <ProductBrowser products={products} categories={categories} />
+      <ProductBrowser products={products} categories={categories} initialQuery={q ?? ""} />
     </main>
   );
 }
