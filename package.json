@@ -1,0 +1,42 @@
+{
+  "name": "shoply",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shoply - a small full-stack e-commerce demo built with Next.js and DynamoDB",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:create": "tsx scripts/create-tables.ts",
+    "db:seed": "tsx scripts/seed.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.888.0",
+    "@aws-sdk/lib-dynamodb": "3.888.0",
+    "next": "15.5.26",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.1.0",
+    "@types/node": "22.10.5",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "@vitejs/plugin-react": "4.3.4",
+    "autoprefixer": "10.4.20",
+    "dotenv": "16.4.7",
+    "eslint": "9.18.0",
+    "eslint-config-next": "15.5.26",
+    "jsdom": "25.0.1",
+    "postcss": "8.5.1",
+    "tailwindcss": "3.4.17",
+    "tsx": "4.19.2",
+    "typescript": "5.7.3",
+    "vitest": "2.1.8"
+  }
+}
