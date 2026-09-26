@@ -172,7 +172,22 @@ Never commit real credentials. `.env.local` is gitignored.
 
 ## Screenshots
 
-_Add screenshots here (home, product listing, product detail, cart, wishlist)._
+Screenshots live in [`docs/screenshots/`](docs/screenshots). Drop the images
+in with the filenames below and they'll render here automatically.
+
+| Page | Preview |
+| ---- | ------- |
+| **Home** — hero, categories, featured products | ![Shoply home page](docs/screenshots/home.png) |
+| **Product listing** — grid with search, filter, and sort | ![Shoply product listing](docs/screenshots/products.png) |
+| **Product detail** — image, price, stock, add to cart, related products | ![Shoply product detail](docs/screenshots/product-detail.png) |
+| **Cart** — line items, quantity controls, subtotal | ![Shoply cart](docs/screenshots/cart.png) |
+| **Wishlist** — saved items with move-to-cart | ![Shoply wishlist](docs/screenshots/wishlist.png) |
+
+> **How to capture them:** start a seeded local instance (`npm run db:create`,
+> `npm run db:seed`, `npm run dev`), open http://localhost:3000, and save a
+> screenshot of each page into `docs/screenshots/` using the exact filenames
+> above (`home.png`, `products.png`, `product-detail.png`, `cart.png`,
+> `wishlist.png`). Until then, the images above will show as broken links.
 
 ## Known Limitations
 
