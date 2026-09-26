@@ -1,13 +1,18 @@
 import Link from "next/link";
 import { listProducts } from "@/lib/dynamodb/products";
 import { listCategories } from "@/lib/dynamodb/categories";
+import { getGuestWishlistProductIds } from "@/lib/services/wishlist";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { CategoryCard } from "@/components/products/CategoryCard";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [products, categories] = await Promise.all([listProducts(), listCategories()]);
+  const [products, categories, wishlistIds] = await Promise.all([
+    listProducts(),
+    listCategories(),
+    getGuestWishlistProductIds(),
+  ]);
   const featured = products.slice(0, 8);
 
   return (
@@ -56,7 +61,7 @@ export default async function Home() {
               View all
             </Link>
           </div>
-          <ProductGrid products={featured} />
+          <ProductGrid products={featured} wishlistIds={wishlistIds} />
         </section>
       </div>
     </main>

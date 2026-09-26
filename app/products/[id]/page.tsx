@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProduct, getRelatedProducts } from "@/lib/dynamodb/products";
+import { getGuestWishlistProductIds } from "@/lib/services/wishlist";
 import { formatPrice } from "@/lib/utils/format";
 import { isValidId } from "@/lib/utils/validation";
 import { AddToCart } from "@/components/products/AddToCart";
@@ -25,7 +26,11 @@ export default async function ProductDetailPage({
     notFound();
   }
 
-  const related = await getRelatedProducts(product);
+  const [related, wishlistIds] = await Promise.all([
+    getRelatedProducts(product),
+    getGuestWishlistProductIds(),
+  ]);
+  const inWishlist = wishlistIds.includes(product.productId);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
@@ -66,12 +71,12 @@ export default async function ProductDetailPage({
           <p className="mt-6 text-gray-700">{product.description}</p>
 
           <div className="mt-8">
-            <AddToCart product={product} />
+            <AddToCart product={product} initialInWishlist={inWishlist} />
           </div>
         </div>
       </div>
 
-      <RelatedProducts products={related} />
+      <RelatedProducts products={related} wishlistIds={wishlistIds} />
     </main>
   );
 }

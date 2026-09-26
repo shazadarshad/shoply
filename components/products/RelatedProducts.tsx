@@ -3,15 +3,16 @@ import { ProductGrid } from "./ProductGrid";
 
 interface RelatedProductsProps {
   products: Product[];
+  wishlistIds?: string[];
 }
 
-export function RelatedProducts({ products }: RelatedProductsProps) {
+export function RelatedProducts({ products, wishlistIds = [] }: RelatedProductsProps) {
   if (products.length === 0) return null;
 
   return (
     <section className="mt-12">
       <h2 className="mb-4 text-xl font-semibold text-gray-900">Related products</h2>
-      <ProductGrid products={products} />
+      <ProductGrid products={products} wishlistIds={wishlistIds} />
     </section>
   );
 }

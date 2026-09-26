@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getCategory } from "@/lib/dynamodb/categories";
 import { listProductsByCategory } from "@/lib/dynamodb/products";
+import { getGuestWishlistProductIds } from "@/lib/services/wishlist";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { isValidId } from "@/lib/utils/validation";
 
@@ -22,7 +23,10 @@ export default async function CategoryPage({
     notFound();
   }
 
-  const products = await listProductsByCategory(categoryId);
+  const [products, wishlistIds] = await Promise.all([
+    listProductsByCategory(categoryId),
+    getGuestWishlistProductIds(),
+  ]);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
@@ -32,6 +36,7 @@ export default async function CategoryPage({
       <div className="mt-6">
         <ProductGrid
           products={products}
+          wishlistIds={wishlistIds}
           emptyTitle="No products in this category yet"
           emptyMessage="Check back soon or browse other categories."
         />
